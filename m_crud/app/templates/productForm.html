@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="dlteTable">delteEntireTable</button>
+    <form id="pForm" >
+        <input type="text" id="name" placeholder="p name">
+        <input type="text" id="desc" placeholder="p desc">
+        <input type="text" id="price" placeholder="p price">
+        <input type="text" id="cat" placeholder="p cat">
+        <input type="text" id="img" placeholder="p img">
+        <button id="addPbtn">addP</button>
+    </form>
+    <button id="getBtn">get</button>
+    <table id="tTable">
+        <tr>
+            <th> id</th>
+            <th> name</th>
+            <th> desc</th>
+            <th> price</th>
+            <th> cat</th>
+            <th> img</th>
+            <th> editF</th>
+            <th> delF</th>
+        </tr>
+        
+    </table>
+    <script src="{% static 'productForm.js' %}"></script>
+</body>
+</html>
