@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Form</title>
+
+    <style>
+        /* ---------- Background ---------- */
+        body {
+            margin: 0;
+            padding: 30px 0;
+            font-family: "Poppins", sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #43cea2, #185a9d);
+            background-size: 300% 300%;
+            animation: bgMove 12s ease infinite;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes bgMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ---------- 3D Glass Form ---------- */
+        .card {
+            width: 380px;
+            padding: 35px 30px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            
+            box-shadow:
+                0 0 25px rgba(255, 255, 255, 0.4),
+                0 20px 40px rgba(0, 0, 0, 0.35),
+                inset 0 0 25px rgba(255, 255, 255, 0.1);
+
+            transform: perspective(900px) translateZ(0);
+            transition: transform 0.3s ease;
+            margin-bottom: 40px;
+        }
+
+        .card:hover {
+            transform: perspective(900px) translateZ(25px) scale(1.03);
+            box-shadow:
+                0 0 35px rgba(255, 255, 255, 0.6),
+                0 25px 55px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            text-align: center;
+            color: white;
+            font-size: 26px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            padding: 14px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.85);
+            font-size: 15px;
+            outline: none;
+            border: none;
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.18);
+            transition: 0.3s;
+        }
+
+        input:focus {
+            transform: translateY(-3px);
+            box-shadow:
+                0 6px 15px rgba(0,0,0,0.25),
+                0 0 12px rgba(255,255,255,0.7);
+        }
+
+        button {
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 8px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+        #addP { background: linear-gradient(135deg, #00e676, #00c853); }
+        #editP { background: linear-gradient(135deg, #ff8a50, #ff7043); }
+
+        button:hover {
+            transform: translateY(-4px) scale(1.04);
+        }
+
+
+        /* ===================================================
+           PRODUCT CARDS UI — CLEAN, NEAT, 3D, GLASS EFFECT
+        ==================================================== */
+
+        #cardsContainer {
+            width: 90%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            padding: 18px;
+            border-radius: 18px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+
+            box-shadow:
+                0 0 18px rgba(255,255,255,0.3),
+                0 12px 25px rgba(0,0,0,0.35);
+
+            transform: perspective(700px) translateZ(0);
+            transition: 0.3s ease;
+            color: white;
+        }
+
+        .product-card:hover {
+            transform: perspective(700px) translateZ(20px) scale(1.05);
+            box-shadow:
+                0 0 25px rgba(255,255,255,0.6),
+                0 20px 45px rgba(0,0,0,0.45);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.35);
+        }
+
+        .product-card p {
+            margin: 5px 0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .product-card span {
+            display: inline-block;
+            margin-top: 4px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h2>Add Product</h2>
+
+        <form>
+            <input type="text" placeholder="Product Name" id="name">
+            <input type="text" placeholder="Product Description" id="desc">
+            <input type="text" placeholder="Price" id="price">
+            <input type="text" placeholder="Category" id="cat">
+            <input type="text" placeholder="Paste Image Link" id="img">
+
+            <button id="addP">Add Product</button>
+            <button id="editP" style="display:none;">Edit Product</button>
+        </form>
+    </div>
+
+    <!-- BEAUTIFUL PRODUCT CARDS -->
+    <div id="cardsContainer"></div>
+
+    <script src="{% static 'pf.js' %}"></script>
+</body>
+</html>
