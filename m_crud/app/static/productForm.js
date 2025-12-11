@@ -3,35 +3,32 @@
 let addPbtn=document.getElementById("addPbtn")
 let getBtn=document.getElementById("getBtn")
 let tTable=document.getElementById("tTable")
+let tBody=document.getElementById("tBody")
 let dlteTableBtn=document.getElementById("dlteTable")
 let pForm=document.getElementById("pForm")
 function loadProducts(){
     tTable.innerHTML=""
-    fetch("/api/get_products/").then(res=>res.json()).then(res=>{
-        console.log(res)
-        res.data.forEach(x=>{
-            let Trow=document.createElement("tr")
-            Trow.innerHTML=`
-            <td>${x.id}</td>
-            <td>${x.name}</td>
-            <td>${x.desc}</td>
-            <td>${x.price}</td>
-            <td>${x.cat}</td>
-            <td>
-            <button>edit</button>
-            </td>
-            <td>
-            <button>delete</button>
-            </td>
-            <td>
-        <img src='${x.img}' width=150/>
-            </td>
-            `
-            tTable.append(Trow)
-        })
-    })
+    alert("hlo")
+    // fetch("/api/get_products/").then(res=>res.json()).then(res=>{
+    //     console.log(res)
+    //     res.data.forEach(x=>{
+    //         let Trow=document.createElement("tr")
+    //         Trow.innerHTML=`
+    //         <td>${x.id}</td>
+    //         <td>
+    //     <img src='${x.img}' width=150/>
+    //         </td>
+    //         `
+    //         tBody.append(Trow)
+    //     })
+    // })
 }
+
+// function deleteProduct(id){
+//     alert("hlo")
+// }
 getBtn.addEventListener("click",(e)=>{
+    e.preventDefault()
     loadProducts()
 })
 addPbtn.addEventListener("click",(e)=>{
@@ -63,7 +60,9 @@ dlteTableBtn.addEventListener("click",(e)=>{
 
 
 
-document.addEventListener("DOMContentLoaded",loadProducts)
+document.addEventListener("DOMContentLoaded",
+    loadProducts
+)
 
 
 

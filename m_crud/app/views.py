@@ -3,13 +3,40 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Products
 # Create your views here.
-def productForm(request):
-    return render(request,"productForm.html")
+
+@api_view(["PUT"])
+def editSingleProduct(request,p_id):
+
+    needToEditP=Products.objects.get(id=p_id)
+    # print(needToEditP,"needToEditp")
+    dataFromC=request.data
+    # print(type(dataFromC))
+    needToEditP.nameP=dataFromC["name"]
+    needToEditP.descP=dataFromC["desc"]
+    needToEditP.priceP=dataFromC["price"]
+    needToEditP.catP=dataFromC["cat"]
+    needToEditP.imgP=dataFromC["img"]
+    needToEditP.save()
+    return Response({"msg":"updated.........."})
+
+@api_view(["DELETE"])
+def deleteSingleProduct(request,p_id):
+    Products.objects.get(id=p_id).delete()
+    return Response({"msg":"deleted successfullyyy"})
+
 
 @api_view(["DELETE"])
 def delete_products(request):
     Products.objects.all().delete()
     return Response({"msg":"deleted successfulyyyy.........."})
+
+
+
+
+def productForm(request):
+    return render(request,"productForm.html")
+
+
 
 
 @api_view(["GET"])
@@ -25,7 +52,7 @@ def get_products(request):
             "cat":i.catP,
             "img":i.imgP
         })
-    print(lData)    
+    # print(lData)    
     return Response({"data":lData})   
     # print(a,"aaa12345678========-------------------")
     
