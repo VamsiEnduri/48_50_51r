@@ -3,11 +3,21 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Admins,Trainers
 # Create your views here.
+@api_view(["PUT"])
+def edit_trainer(request,__id):
+    reqData=request.data
+    tr= Trainers.objects.get(id=__id) # select * from trainers where id =1
+    tr.name = reqData["name"]
+    tr.email = reqData["email"]
+    tr.exp = reqData["exp"]
+    tr.admin= Admins.objects.get(id=reqData["ad_id"])
+    tr.save()
+    return Response({"msg":"trainer updated successfully..."})
+
 @api_view(["DELETE"])
 def delete_trainer(request,id):
     Trainers.objects.get(id=id).delete()
     return Response({"msg":f"{id} trainer deleted successfully..."})
-
 
 @api_view(["GET"])
 def get_trainers(request):
